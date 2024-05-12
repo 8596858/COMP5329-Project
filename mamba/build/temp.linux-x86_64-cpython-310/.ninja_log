@@ -1,0 +1,11 @@
+# ninja log v5
+0	47836	1715348801012976346	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan.o	65fae559fed60081
+4	110158	1715348863296533005	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_fwd_fp32.o	2876d8729616d114
+3	111995	1715348865108633492	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_fwd_fp16.o	8452ce21234e2f63
+3	112530	1715348865648663404	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_fwd_bf16.o	d7960acb4196bb5f
+3	158455	1715348911603157833	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_bwd_fp32_real.o	afd85eac0fc65d11
+2	159004	1715348912147186779	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_bwd_fp16_real.o	672a479f8f7b9716
+1	164215	1715348917355463187	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_bwd_bf16_real.o	5a9bb37077d073c6
+2	196308	1715348949425138980	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_bwd_fp32_complex.o	32c364253dd827da
+2	199595	1715348952721308735	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_bwd_fp16_complex.o	e951e2953e11caa3
+1	204989	1715348958109585263	/root/autodl-tmp/Vim-main/mamba/build/temp.linux-x86_64-cpython-310/csrc/selective_scan/selective_scan_bwd_bf16_complex.o	2fdef6609061d085
