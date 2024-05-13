@@ -1,5 +1,0 @@
-# ninja log v5
-1	4228	1715348675053089841	/root/autodl-tmp/Vim-main/causal-conv1d/build/temp.linux-x86_64-cpython-310/csrc/causal_conv1d_update.o	406d61b50f92a126
-1	9921	1715348680737468238	/root/autodl-tmp/Vim-main/causal-conv1d/build/temp.linux-x86_64-cpython-310/csrc/causal_conv1d_fwd.o	f18e55fc66638c45
-0	20288	1715348691110152862	/root/autodl-tmp/Vim-main/causal-conv1d/build/temp.linux-x86_64-cpython-310/csrc/causal_conv1d.o	90dcac96db8b582d
-0	26685	1715348697486570000	/root/autodl-tmp/Vim-main/causal-conv1d/build/temp.linux-x86_64-cpython-310/csrc/causal_conv1d_bwd.o	b29f57f3f9db56e6

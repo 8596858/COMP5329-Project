@@ -120,7 +120,7 @@ class Mamba(nn.Module):
         self.D._no_weight_decay = True
 
         # bidirectional
-        # assert bimamba_type == "v2"
+        assert bimamba_type == "v2"
 
         A_b = repeat(
             torch.arange(1, self.d_state + 1, dtype=torch.float32, device=device),
