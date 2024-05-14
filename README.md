@@ -1,5 +1,15 @@
 # COMP5329-Project
 
+install:\
+pip install -r requirements.txt\
+cd causal-conv1d\
+python setup.py install\
+cd ..\
+cd mamba\
+python setup.py install\
+cd ..\
+python setup.py develop
+
 datasets:\
 
 train:\
