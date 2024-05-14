@@ -6,7 +6,7 @@
 - PyTorch 2.1.2
 - NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
 
-install:\
+## install:
 ```bash
 git clone https://github.com/8596858/COMP5329-Project.git
 conda create -n NewSR python=3.10
@@ -21,23 +21,24 @@ cd ..
 python setup.py develop
 ```
 
-datasets:\
+## datasets:
+[Google Drive](https://drive.google.com/drive/folders/19P2tB8aBen5DE8Zis_ZsGO-VglqlM80G?usp=sharing)
 
-train:\
+## train:
 ```shell
 python basicsr/train.py -opt options/Train/train_x2.yml
 python basicsr/train.py -opt options/Train/train_x3.yml
 python basicsr/train.py -opt options/Train/train_x4.yml
 ```
 
-test:\
+## test:
 ```shell
 python basicsr/test.py -opt options/Test/test_x2.yml
 python basicsr/test.py -opt options/Test/test_x3.yml
 python basicsr/test.py -opt options/Test/test_x4.yml
 ```
 
-ablation study:\
+## ablation study:
 ```shell
 python basicsr/test.py -opt options/Test/test_ablation_STB_CMB_MCRM.yml
 python basicsr/test.py -opt options/Test/test_ablation_STB_CMB.yml
