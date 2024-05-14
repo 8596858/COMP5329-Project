@@ -21,7 +21,7 @@ cd ..
 python setup.py develop
 ```
 
-## datasets:
+## datasets and pretrained models:
 [Google Drive](https://drive.google.com/drive/folders/19P2tB8aBen5DE8Zis_ZsGO-VglqlM80G?usp=sharing)
 
 ## train:
