@@ -419,6 +419,9 @@ class Adaptive_Spatial_Attention(nn.Module):
 
 class Channel_Mamba_Block(nn.Module):
     # The implementation builds on XCiT code https://github.com/facebookresearch/xcit
+    ##
+    # This is the core module, CMB of our research.
+    ##
     def __init__(self, dim, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
         super().__init__()
         self.num_heads = num_heads
@@ -623,6 +626,9 @@ class ResidualGroup(nn.Module):
                 x = checkpoint.checkpoint(blk, x, x_size)
             else:
                 x = blk(x, x_size)
+        ##
+        # This is the core module, MCRM of our research.
+        ##
         temp = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
         p = self.pool(temp)
         p = p.view(p.shape[0], p.shape[2], p.shape[1])
