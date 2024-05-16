@@ -26,7 +26,7 @@ python setup.py develop
 [Google Drive](https://drive.google.com/drive/folders/19P2tB8aBen5DE8Zis_ZsGO-VglqlM80G?usp=sharing)
 
 ## Main Contribution:
-Channel Mamba Block: in basicsr/archs/new_arch.py class Channel_Mamba_Block.
+Channel Mamba Block: in basicsr/archs/new_arch.py class Channel_Mamba_Block.\
 Mamba Channel Recursion Module: in basicsr/archs/new_arch.py class ResidualGroup.
 
 ## train:
