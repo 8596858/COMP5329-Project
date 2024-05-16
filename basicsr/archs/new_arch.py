@@ -419,10 +419,14 @@ class Adaptive_Spatial_Attention(nn.Module):
 
 class Channel_Mamba_Block(nn.Module):
     # The implementation builds on XCiT code https://github.com/facebookresearch/xcit
-    ##
-    # This is the core module, CMB of our research.
-    ##
-    def __init__(self, dim, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
+    """ Channel Mamba Block, a core module of our research
+    Args:
+        dim (int): Number of input channels.
+        qkv_bias (bool): If True, add a learnable bias to query, key, value. Default: True
+        attn_drop (float): Attention dropout rate. Default: 0.0
+        proj_drop (float): Out projection dropout rate. Default: 0.0
+    """
+    def __init__(self, dim, num_heads=8, qkv_bias=False, attn_drop=0., proj_drop=0.):
         super().__init__()
         self.num_heads = num_heads
         self.temperature = nn.Parameter(torch.ones(num_heads, 1, 1))
@@ -474,6 +478,10 @@ class Channel_Mamba_Block(nn.Module):
 
 
 class SAMB(nn.Module):
+    """ Spatial Attention Mamba Block
+    STB: Spatial Transformer Block
+    CMB: Channel-Mamba Block
+    """
     def __init__(self, dim, num_heads, reso=64, split_size=[2,4],shift_size=[1,2], expansion_factor=4., qkv_bias=False, qk_scale=None, drop=0.,
                  attn_drop=0., drop_path=0., act_layer=nn.GELU, norm_layer=nn.LayerNorm, rg_idx=0, b_idx=0):
         super().__init__()
@@ -613,6 +621,12 @@ class ResidualGroup(nn.Module):
         res = x
         mamba_list = None
         index = 0
+        ##
+        # This is the core module, MCRM of our research.
+        ##
+        """Mamba Channel Recursion Module (MCRM):
+        Channel weight calculation is performed through Mamba.
+        """
         for blk in self.blocks:
             if index % 2 == 0:
                 temp = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
@@ -626,9 +640,6 @@ class ResidualGroup(nn.Module):
                 x = checkpoint.checkpoint(blk, x, x_size)
             else:
                 x = blk(x, x_size)
-        ##
-        # This is the core module, MCRM of our research.
-        ##
         temp = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
         p = self.pool(temp)
         p = p.view(p.shape[0], p.shape[2], p.shape[1])
@@ -637,7 +648,6 @@ class ResidualGroup(nn.Module):
         mamba_list = self.mamba(mamba_list)
         p = mamba_list[:, mamba_list.shape[1] - 1]
         p = self.mlp1(p)
-        # p = self.sgfn(p)
         p = F.sigmoid(p)
         p = p.view(p.shape[0], p.shape[1], 1, 1)
         x = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
@@ -821,34 +831,6 @@ class MPSI(nn.Module):
                 resi_connection=resi_connection,
                 rg_idx=i)
             self.layers['layer_{}'.format(i)] = layer
-            # self.seq['seq_{}'.format(i)] = nn.Sequential(
-            #     nn.BatchNorm2d(embed_dim),
-            #     nn.ReLU(inplace=True),
-            #     nn.AdaptiveAvgPool2d(1)
-            # )
-        
-        # self.seq['seq_{}'.format(self.num_layers)] = nn.Sequential(
-        #     nn.BatchNorm2d(embed_dim),
-        #     nn.ReLU(inplace=True),
-        #     nn.AdaptiveAvgPool2d(1)
-        # )
-        # self.mlp1 = Mlp(embed_dim, embed_dim*2, embed_dim)
-        # self.pool = nn.AdaptiveAvgPool2d(1)
-        # # self.mlp2 = Mlp(embed_dim, embed_dim//2, embed_dim)
-        # # self.sa = SpatialAttention()
-        # self.norm1 = norm_layer(embed_dim)
-        # # self.norm2 = nn.BatchNorm2d(embed_dim)
-        # self.act = nn.LeakyReLU(negative_slope=0.01, inplace=True)
-        
-        # self.mamba = Mamba(
-        #     # This module uses roughly 3 * expand * d_model^2 parameters
-        #     d_model=embed_dim, # Model dimension d_model
-        #     d_state=64,  # SSM state expansion factor # 64
-        #     d_conv=4,    # Local convolution width
-        #     expand=4,    # Block expansion factor
-        #     use_fast_path=True,
-        #     bimamba_type="none"
-        # )
 
         self.norm = norm_layer(curr_dim)
         # build the last conv layer in deep feature extraction
@@ -888,33 +870,10 @@ class MPSI(nn.Module):
         _, _, H, W = x.shape
         x_size = [H, W]
         x = self.before_RG(x)
-        # mamba_list = None
         for i in range(self.num_layers):
-            # res = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
-            # p = self.pool(res)
-            # p = p.view(p.shape[0], p.shape[2], p.shape[1])
-            # if mamba_list is None:
-            #     mamba_list = p
-            # else:
-            #     mamba_list = torch.cat((mamba_list, p), dim=1)
             x = self.layers['layer_{}'.format(i)](x, x_size)
-        # x = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
-        # p = self.pool(x)
-        # p = p.view(p.shape[0], p.shape[2], p.shape[1])
-        # mamba_list = torch.cat((mamba_list, p), dim=1)
-        # mamba_list = self.norm1(mamba_list)
-        # mamba_list = self.mamba(mamba_list)
-        # p = mamba_list[:, mamba_list.shape[1] - 1]
-        # p = self.mlp1(p)
-        # p = F.sigmoid(p)
-        # p = p.view(p.shape[0], p.shape[1], 1, 1)
-        # x = x * p
-        # x = rearrange(x, "b c h w -> b (h w) c", h=H, w=W)
-        # x = self.mlp2(x)
         x = self.norm(x)
         x = rearrange(x, "b (h w) c -> b c h w", h=H, w=W)
-        # x = self.norm2(x)
-        # x = self.sa(x)
 
         return x
 
