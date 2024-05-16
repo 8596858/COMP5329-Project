@@ -40,11 +40,45 @@ python basicsr/test.py -opt options/Test/test_x4.yml
 
 ## ablation study:
 ```shell
+# The ablation study on CMB and MCRM
 python basicsr/test.py -opt options/Test/test_ablation_STB_CMB_MCRM.yml
 python basicsr/test.py -opt options/Test/test_ablation_STB_CMB.yml
 python basicsr/test.py -opt options/Test/test_ablation_STB_STB_MCRM.yml
 python basicsr/test.py -opt options/Test/test_ablation_STB_STB.yml
+
+# The ablation study on VMM in CMB
 python basicsr/test.py -opt options/Test/text_ablation_STB_CTB_MCRM.yml
+```
+
+## Hyperparameter Analysis:
+```shell
+# Analysis on the Block expansion factor in MCRM
+python basicsr/test.py -opt options/Test/hyper_block_1_MCRM.yml
+python basicsr/test.py -opt options/Test/hyper_block_4_MCRM.yml
+
+# Analysis on the Block expansion factor in CMB
+python basicsr/test.py -opt options/Test/hyper_block_1_CMB.yml
+python basicsr/test.py -opt options/Test/hyper_block_2_CMB.yml
+
+# Analysis on the SSM state expansion factor in MCRM
+python basicsr/test.py -opt options/Test/hyper_state_16_MCRM.yml
+python basicsr/test.py -opt options/Test/hyper_state_32_MCRM.yml
+
+# Analysis on the SSM state expansion factor in CMB
+python basicsr/test.py -opt options/Test/hyper_state_16_CMB.yml
+python basicsr/test.py -opt options/Test/hyper_state_64_CMB.yml
+
+# Analysis on the Local convolution width in MCRM
+python basicsr/test.py -opt options/Test/hyper_conv_2_MCRM.yml
+python basicsr/test.py -opt options/Test/hyper_conv_3_MCRM.yml
+
+# Analysis on the Local convolution width in CMB
+python basicsr/test.py -opt options/Test/hyper_conv_2_CMB.yml
+python basicsr/test.py -opt options/Test/hyper_conv_4_CMB.yml
+
+# Analysis on the depth of the network
+python basicsr/test.py -opt options/Test/hyper_depth_6.yml
+python basicsr/test.py -opt options/Test/hyper_depth_12.yml
 ```
 
 The implementation is based on DAT: https://github.com/zhengchen1999/DAT/tree/main?tab=readme-ov-file
