@@ -8,6 +8,7 @@
 
 ## install:
 ```bash
+# Clone the github repo and go to the default directory 'COMP5329-Project'.
 git clone https://github.com/8596858/COMP5329-Project.git
 conda create -n NewSR python=3.10
 conda activate NewSR
