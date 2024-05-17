@@ -43,46 +43,70 @@ python basicsr/test.py -opt options/Test/test_x3.yml
 python basicsr/test.py -opt options/Test/test_x4.yml
 ```
 
-## ablation study:
+## Ablation study:
 ```shell
 # The ablation study on CMB and MCRM
+# The model with the whole structure
 python basicsr/test.py -opt options/Test/test_ablation_STB_CMB_MCRM.yml
+# The model without the MCRM
 python basicsr/test.py -opt options/Test/test_ablation_STB_CMB.yml
+# The model without the CMB
 python basicsr/test.py -opt options/Test/test_ablation_STB_STB_MCRM.yml
+# The model without the MCRM and CMB
 python basicsr/test.py -opt options/Test/test_ablation_STB_STB.yml
 
 # The ablation study on VMM in CMB
+# The model without VMM in CMB
 python basicsr/test.py -opt options/Test/text_ablation_STB_CTB_MCRM.yml
+# The model with VMM in CMB
+python basicsr/test.py -opt options/Test/test_ablation_STB_CMB_MCRM.yml
 ```
 
 ## Hyperparameter Analysis:
 ```shell
-# Analysis on the Block expansion factor in MCRM
+#The baseline model
+python basicsr/test.py -opt options/Test/test_ablation_STB_CMB_MCRM.yml
+
+# Analysis of the Block expansion factor in MCRM
+# The Block expansion factor is 1
 python basicsr/test.py -opt options/Test/hyper_block_1_MCRM.yml
+# The Block expansion factor is 4
 python basicsr/test.py -opt options/Test/hyper_block_4_MCRM.yml
 
-# Analysis on the Block expansion factor in CMB
+# Analysis of the Block expansion factor in CMB
+# The Block expansion factor is 1
 python basicsr/test.py -opt options/Test/hyper_block_1_CMB.yml
+# The Block expansion factor is 2
 python basicsr/test.py -opt options/Test/hyper_block_2_CMB.yml
 
-# Analysis on the SSM state expansion factor in MCRM
+# Analysis of the SSM state expansion factor in MCRM
+# The SSM state expansion factor is 16
 python basicsr/test.py -opt options/Test/hyper_state_16_MCRM.yml
+# The SSM state expansion factor is 32
 python basicsr/test.py -opt options/Test/hyper_state_32_MCRM.yml
 
-# Analysis on the SSM state expansion factor in CMB
+# Analysis of the SSM state expansion factor in CMB
+# The SSM state expansion factor is 16
 python basicsr/test.py -opt options/Test/hyper_state_16_CMB.yml
+# The SSM state expansion factor is 64
 python basicsr/test.py -opt options/Test/hyper_state_64_CMB.yml
 
-# Analysis on the Local convolution width in MCRM
+# Analysis of the Local convolution width in MCRM
+# The Local convolution width is 2
 python basicsr/test.py -opt options/Test/hyper_conv_2_MCRM.yml
+# The Local convolution width is 3
 python basicsr/test.py -opt options/Test/hyper_conv_3_MCRM.yml
 
-# Analysis on the Local convolution width in CMB
+# Analysis of the Local convolution width in CMB
+# The Local convolution width is 2
 python basicsr/test.py -opt options/Test/hyper_conv_2_CMB.yml
+# The Local convolution width is 4
 python basicsr/test.py -opt options/Test/hyper_conv_4_CMB.yml
 
-# Analysis on the depth of the network
+# Analysis of the depth of the network
+# The number of SAMB is 3
 python basicsr/test.py -opt options/Test/hyper_depth_6.yml
+# The number of SAMB is 6
 python basicsr/test.py -opt options/Test/hyper_depth_12.yml
 ```
 
