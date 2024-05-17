@@ -87,3 +87,4 @@ python basicsr/test.py -opt options/Test/hyper_depth_12.yml
 ```
 
 The implementation is based on [DAT](https://github.com/zhengchen1999/DAT/tree/main?tab=readme-ov-file) and [Vision Mamba](https://github.com/hustvl/Vim/tree/main?tab=readme-ov-file)
+The code is based on the [basicsr](https://github.com/XPixelGroup/BasicSR)
